@@ -25,11 +25,15 @@
 #include <string>
 #include "short_alloc.h" // https://howardhinnant.github.io/stack_alloc.html
 
-using stack_string_allocator = short_alloc<char, 2048u, alignof ( std::max_align_t )>;
-using stack_string = std::basic_string<char, std::char_traits<char>, stack_string_allocator>;
+template<typename CharType, std::size_t Size>
+using stack_string_allocator = short_alloc<CharType, Size, alignof ( std::max_align_t )>;
+template<typename CharType, std::size_t Size>
+using basic_stack_string = std::basic_string<CharType, std::char_traits<CharType>, stack_string_allocator<CharType, Size>>;
 
 
 int main ( const int argc, const char* argv [ ] ) {
+
+    using stack_string = basic_stack_string<char, 2048u>;
 
     stack_string::allocator_type::arena_type allocator;
     stack_string command { allocator };
