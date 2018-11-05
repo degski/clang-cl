@@ -45,7 +45,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>llvm</PlatformToolset>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -81,6 +81,7 @@
     <LinkIncremental>false</LinkIncremental>
     <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)-lld</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -91,6 +92,7 @@
     <LinkIncremental>false</LinkIncremental>
     <IntDir>$(SolutionDir)$(Platform)\$(Configuration)\</IntDir>
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
+    <TargetName>$(ProjectName)-lld</TargetName>
   </PropertyGroup>
   <PropertyGroup Label="LLVM" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClangClAdditionalOptions>-m64 -fmsc-version=1915 -fno-delayed-template-parsing -mmmx -msse -msse2 -msse3 -msse4.1 -msse4.2 -maes -mavx -mavx2 -mbmi -mbmi2 -mpopcnt -mf16c -mxsaveopt -mlzcnt -mfma -mpclmul -mxsave -mrdrnd -mfxsr -madx -openmp -Xclang -fforce-enable-int128 -Xclang -std=c++17 -Xclang -faligned-allocation -Xclang -pedantic -Xclang -ffast-math -Xclang -fcolor-diagnostics -Xclang -fcoroutines-ts -Xclang -ffine-grained-bitfield-accesses -Xclang -ffixed-point -Xclang -fmodules -Xclang -fmodules-ts -Xclang -frelaxed-template-template-args -Xclang -fsized-deallocation -Qunused-arguments -Wno-unused-function -Wno-unused-variable -Wno-language-extension-token -Wno-deprecated-declarations -Wno-unknown-pragmas -Wno-ignored-pragmas -Wno-unused-private-field -Wno-unused-command-line-argument -Xclang -flto=thin</ClangClAdditionalOptions>
