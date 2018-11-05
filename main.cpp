@@ -36,9 +36,7 @@ int main ( const int argc, const char* argv [ ] ) {
     using stack_string = basic_stack_string<char, 2048u>;
 
     stack_string::allocator_type::arena_type allocator;
-    stack_string command { allocator };
-
-    command += "\"C:\\Program Files\\LLVM\\bin\\clang-cl.exe\" -fuse-ld=lld -flto=thin";
+    stack_string command { "\"C:\\Program Files\\LLVM\\bin\\clang-cl.exe\" -fuse-ld=lld -flto=thin", allocator };
 
     for ( int i = 1; i < argc; ++i ) {
         command += ' ';
