@@ -21,6 +21,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include <process.h>
 #include <cstdlib>
 #include <string>
 #include "short_alloc.h" // https://howardhinnant.github.io/stack_alloc.html
@@ -31,17 +32,17 @@ template<typename CharType, std::size_t Size>
 using basic_stack_string = std::basic_string<CharType, std::char_traits<CharType>, stack_string_allocator<CharType, Size>>;
 
 
-int main ( const int argc, const char* argv [ ] ) {
+int wmain ( const int argc, const wchar_t* argv [ ] ) {
 
-    using stack_string = basic_stack_string<char, 2048u>;
+    using stack_string = basic_stack_string<wchar_t, 2048u>;
 
     stack_string::allocator_type::arena_type allocator;
-    stack_string command { "\"C:\\Program Files\\LLVM\\bin\\clang-cl.exe\" -fuse-ld=lld -flto=thin", allocator };
+    stack_string command { L"\"C:\\Program Files\\LLVM\\bin\\clang-cl.exe\" -fuse-ld=lld -flto=thin", allocator };
 
     for ( int i = 1; i < argc; ++i ) {
-        command += ' ';
+        command += L' ';
         command += argv [ i ];
     }
 
-    return std::system ( command.c_str ( ) );
+    return _wsystem ( command.c_str ( ) );
 }
