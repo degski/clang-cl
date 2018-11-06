@@ -21,18 +21,23 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <process.h>
+#include <process.h> // _wsystem
 #include <cstdlib>
 #include <string>
 #include "short_alloc.h" // https://howardhinnant.github.io/stack_alloc.html
 
+#if defined ( _DEBUG )
 template<typename CharType, std::size_t Size>
 using stack_string_allocator = short_alloc<CharType, Size, alignof ( std::max_align_t )>;
+#else
+template<typename CharType, std::size_t Size>
+using stack_string_allocator = short_alloc<CharType, Size, alignof ( CharType )>;
+#endif
 template<typename CharType, std::size_t Size>
 using basic_stack_string = std::basic_string<CharType, std::char_traits<CharType>, stack_string_allocator<CharType, Size>>;
 
 
-int wmain ( const int argc, const wchar_t* argv [ ] ) {
+int wmain ( const int argc, const wchar_t * argv [ ] ) {
 
     using stack_string = basic_stack_string<wchar_t, 2048u>;
 
